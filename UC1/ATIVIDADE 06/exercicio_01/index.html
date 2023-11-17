@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 01</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 35px auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        01– Implemente o programa usando o SWITCH que receba o código correspondente
+        ao cargo de um funcionário e o seu salário atual e imprima o cargo, o salário atual, o
+        codigo do aumento e seu novo salário. Os cargos estão na tabela a seguir.
+    </pre>
+
+        <table>
+            <tr>
+                <th>
+                    <b>Código</b>
+                </th>
+                <th>
+                    <b>Cargo</b>
+                </th>
+                <th>
+                    <b>Percentual</b>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    1
+                </th>
+                <th>
+                    Escriturário
+                </th>
+                <th>
+                    50%
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    2
+                </th>
+                <th>
+                    Secretário
+                </th>
+                <th>
+                    35%
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    3
+                </th>
+                <th>
+                    Caixa
+                </th>
+                <th>
+                    20%
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    4
+                </th>
+                <th>
+                    Gerente
+                </th>
+                <th>
+                    10%
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    5
+                </th>
+                <th>
+                    Diretor
+                </th>
+                <th>
+                    05%
+                </th>
+            </tr>
+        </table>
+
+        <pre><b>Nome do projeto - exercicio001.php</b></pre>
+
+    <form action="exercicio001.php" method="GET">
+        <label for="codigo">Digite o código: </label>
+        <input type="text" id="codigo" name="codigo">
+
+        <br><br>
+
+        <label for="salario">Digite seu salário: </label>
+        <input type="text" id="salario" name="salario">
+
+        <br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>
