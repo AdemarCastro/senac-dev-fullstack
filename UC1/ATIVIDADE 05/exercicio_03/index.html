@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 03</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 35px auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        03 – A empresa concederá um aumento de salário para seus funcionários, variável
+        de acordo com o cargo, conforme tabela abaixo. Implemente o programa que leia o
+        salário e o código do cargo de cada funcionário, e calcule o novo salário. Se o
+        cargo do funcionário não estiver na tabela, ele deverá, então, receber 35,5% de
+        aumento. Imprima o salário antigo, o novo salário e a diferença.
+    </pre>
+
+        <table>
+            <tr>
+                <th>
+                    <b>Código</b>
+                </th>
+                <th>
+                    <b>cargo</b>
+                </th>
+                <th>
+                    <b>Percentual</b>
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    91
+                </th>
+                <th>
+                    Gerente
+                </th>
+                <th>
+                    10%
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    92
+                </th>
+                <th>
+                    Analista
+                </th>
+                <th>
+                    20%
+                </th>
+            </tr>
+            <tr>
+                <th>
+                    93
+                </th>
+                <th>
+                    Técnico
+                </th>
+                <th>
+                    30%
+                </th>
+            </tr>
+        </table>
+
+        <pre>
+            <b>Nome do programa – atividade03.php</b>
+        </pre>
+
+    <form action="atividade03.php" method="GET">
+        <label for="salario">Digite seu Salário: R$ </label>
+        <input type="text" id="salario" name="salario">
+
+        <label for="codigo"><br><br>Digite o Código do seu Cargo: </label>
+        <input type="text" id="codigo" name="codigo">
+
+        <br><br>
+
+        <input type="submit" value="Enviar">
+    </form>
+</body>
+</html>

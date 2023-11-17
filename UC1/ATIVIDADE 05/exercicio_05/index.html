@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atividade 05</title>
+
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: 35px auto;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <pre>
+        05– Implemente o programa que receba a nota e imprima o conceito que a nota
+        vale conforme a tabela abaixo:
+    </pre>
+
+    <table>
+        <tr>
+            <th>
+                <b>MÉDIA PONDERADA</b>
+            </th>
+            <th>
+                <b>CONCEITO</b>
+            </th>
+        </tr>
+        <tr>
+            <th>
+                8,0 à 10,0
+            </th>
+            <th>
+                A
+            </th>
+        </tr>
+        <tr>
+            <th>
+                7,0 à 7,9
+            </th>
+            <th>
+                B
+            </th>
+        </tr>
+        <tr>
+            <th>
+                6,0 à 6,9
+            </th>
+            <th>
+                C
+            </th>
+        </tr>
+        <tr>
+            <th>
+                5,0 à 5,9
+            </th>
+            <th>
+                D
+            </th>
+        </tr>
+        <tr>
+            <th>
+                0,0 à 4,9
+            </th>
+            <th>
+                    E
+            </th>
+        </tr>
+    </table>
+
+    <pre>
+        <b>Nome do programa- atividade05.php</b>
+    </pre>
+
+    <form action="atividade05.php" method="GET">
+        <label for="nota">Insira sua nota: </label>
+        <input type="text" id="nota" name="nota">
+        <input type="submit" name="Enviar">
+    </form>
+</body>
+</html>
