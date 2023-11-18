@@ -10,7 +10,7 @@ O curso é dividido em diferentes unidades curriculares, cada uma com seu foco e
 
 ### Back End
 ---
-### UC1: Desenvolvimento Web (96 Horas)
+### UC1: Fundamentos Lógicos para Aplicações Web (96 Horas)
 - 🖥️ Seleção de metodologia de codificação
 - 🗃️ Modelagem de banco de dados
 - 💾 Uso de linguagem SQL
