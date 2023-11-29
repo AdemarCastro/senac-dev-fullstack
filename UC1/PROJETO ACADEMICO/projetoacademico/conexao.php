@@ -1,6 +1,15 @@
 <?php
 
     // Criando conexão com o Banco de Dados
-    $conexao = new PDO("mysql:host=localhost; dbname=projeto-academico;", "root", "");
+    function conectar() {
+        try {
+        $conexao = new PDO("mysql:host=localhost; dbname=academico", "root", "");
+        } catch(PDOException $e) {
+            echo $e -> getMessage();
+            echo $e -> getCode();
+        }
+
+        return $conexao;
+    }
 
 ?>
