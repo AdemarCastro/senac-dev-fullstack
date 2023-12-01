@@ -1,5 +1,5 @@
 <?php
-
+    
     session_start();
 
     // 1 - Conectar com o Banco de Dados
@@ -35,14 +35,54 @@
     $row = $query -> rowCount();
 
     // 8 - Sistema de Login Simples com uma única seção
-    if ($row == 1) {
-        $_SESSION['usuario'] = $email;
-        header('Location: painel.php');
-        exit();
-    } else {
+    // if ($row == 1) {
+    //     $_SESSION['usuario'] = $email;
+    //     header('Location: painel.php');
+    //     exit();
+    // } else {
+    //     $_SESSION['nao_autenticado'] = true;
+    //     header('Location: login.php');
+    //     exit();
+    // }
+
+    // 8 - Criando um sistema de login com nível de acesso
+    if($row == 1){
+        $verificar = $conexao -> query("SELECT * FROM usuarios");
+        
+        while($linha = $verificar -> fetch(PDO::FETCH_ASSOC)){ // Fetch_assoc torna possível verificar via Chave : Valor
+            if ($linha['email'] == $email){
+                $nivel = $linha['painel'];
+
+                switch($nivel){
+                    case 'Administrador':
+                        $_SESSION['usuario'] = $email;
+                        header('Location: painel-adm.php');
+                        exit();
+                    break;
+                    case 'Professor':
+                        $_SESSION['usuario'] = $email;
+                        header('Location: painel-pro.php');
+                        exit();
+                    break;
+                    case 'Aluno':
+                        $_SESSION['usuario'] = $email;
+                        header('Location: painel-alu.php');
+                        exit();
+                    break;
+                    default:
+                        $_SESSION['usuario'] = $email;
+                        header('Location: painel-semacesso.php');
+                        exit();
+                    break;
+                }
+            }
+        }
+
+    }else{
         $_SESSION['nao_autenticado'] = true;
         header('Location: login.php');
         exit();
     }
+
     // echo $row;
 ?>
