@@ -1,12 +1,14 @@
 <?php
 
+    session_start();
+
     // 1 - Conectar com o Banco de Dados
     include("conexao.php");
     $conexao = conectar();
 
     // 2 - Verificar se os campos estão vazios
     if (empty($_POST['email']) || empty($_POST['senha'])) { // empty é uma função que verifica se o campo está vazio
-        header("Location:login.html"); // Redirecionando para a página de login
+        header("Location:login.php"); // Redirecionando para a página de login
 
         exit();
     }
@@ -31,6 +33,16 @@
 
     // 7 - Armazenando o resultado da consulta em uma variável
     $row = $query -> rowCount();
-    
-    echo $row;
+
+    // 8 - Sistema de Login Simples com uma única seção
+    if ($row == 1) {
+        $_SESSION['usuario'] = $email;
+        header('Location: painel.php');
+        exit();
+    } else {
+        $_SESSION['nao_autenticado'] = true;
+        header('Location: login.php');
+        exit();
+    }
+    // echo $row;
 ?>
