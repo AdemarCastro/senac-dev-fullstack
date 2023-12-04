@@ -12,7 +12,7 @@ USE academico;
 
 # Criando Tabela de Usuários
 CREATE TABLE IF NOT EXISTS usuarios (
-id INT NOT NULL PRIMARY KEY,
+id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
 matricula VARCHAR(3) NOT NULL UNIQUE,
 nome VARCHAR(120) NOT NULL,
 email VARCHAR(120) NOT NULL,
@@ -27,17 +27,20 @@ DROP TABLE usuarios;
 SHOW TABLES;
 
 # Inserindo Usuário
-INSERT INTO usuarios (id, matricula, nome, email, senha, estatus, painel)
-VALUES ('1', '001', 'Ademar Castro', 'ademar.castro@gmail.com', md5('1234'), 'Ativo', 'Administrador')
+INSERT INTO usuarios (matricula, nome, email, senha, estatus, painel)
+VALUES ('001', 'Ademar Castro', 'ademar.castro@gmail.com', md5('1234'), 'Ativo', 'Administrador')
 ;
 
-INSERT INTO usuarios (id, matricula, nome, email, senha, estatus, painel)
-VALUES ('2', '002', 'João Gomes', 'joao.gomes@gmail.com', md5('12345'), 'Inativa', 'Aluno')
+INSERT INTO usuarios (matricula, nome, email, senha, estatus, painel)
+VALUES ('002', 'João Gomes', 'joao.gomes@gmail.com', md5('12345'), 'Inativa', 'Aluno')
 ;
 
-INSERT INTO usuarios (id, matricula, nome, email, senha, estatus, painel)
-VALUES ('3', '003', 'Lucas Luco', 'lucas.luco@gmail.com', md5('123456'), 'Ativo', 'Professor')
+INSERT INTO usuarios (matricula, nome, email, senha, estatus, painel)
+VALUES ('003', 'Lucas Luco', 'lucas.luco@gmail.com', md5('123456'), 'Ativo', 'Professor')
 ;
 
 # Visualizar os Usuários
 SELECT * FROM usuarios;
+
+DELETE FROM usuarios
+WHERE id = 5;
