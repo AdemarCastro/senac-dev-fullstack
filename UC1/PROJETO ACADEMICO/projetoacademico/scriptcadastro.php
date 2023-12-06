@@ -47,6 +47,9 @@
         echo "E-mail já cadastrado!";
     endif;
 
+    // Criando as SESSÕES "cadastrado" e "não_cadastrado"
+    $result = $cadastro -> rowCount();
+
     // Criando as sessões "cadastrado" e "não_cadastrado"
     if ($result == 1) {
         $_SESSION['cadastrado'] = true;
