@@ -82,17 +82,38 @@
                 <th>Email</th>
                 <th>Estatus</th>
                 <th>Data Cadastro</th>
+                <th>Data Edição</th>
+                <th>Gerenciador</th>
             </tr>
         </thead>
         <tbody>
         <?php
 
+            /* -------------------------- PAGINAÇÃO - PARTE 1 - INÍCIO -------------------------- */
+                // 1 - Criando uma variável para informar a página atual usando GET
+                // http://localhost/projetoacademico/listar.php?page=1
+
+                // 2 - Criando uma variável para receber o número da página atual para URL
+                $pagina_atual = filter_input(INPUT_GET, "page", FILTER_SANITIZE_NUMBER_INT);
+
+                // 3 - Verificar se a numeração não foi enviada através da URL
+                $pagina = (!empty($pagina_atual)) ? $pagina_atual : 1;
+
+                // 4 - Setar a quantidade de registros por página
+                $limite_result = 2;
+
+                // 5 - Calcular o início de visualização (precisamos identificaro número a partir de qual registro irá iniciar a próxima página)
+                $inicio = ($limite_result * $pagina) - $limite_result;
+
+            /* -------------------------- PAGINAÇÃO - PARTE 1 - FINAL -------------------------- */
+
             // 2 - Criando a consulta de registros de usuários
-            $query_usuarios = $conexao -> prepare("SELECT id, matricula, nome, email, estatus, data_cadastro FROM usuarios");
+            $query_usuarios = $conexao -> prepare("SELECT id, matricula, nome, email, estatus, data_cadastro FROM usuarios ORDER BY data_cadastro ASC");
 
             // 3 - Executando a consulta
             $query_usuarios -> execute();
 
+            
             // 4 - Verificando se encontrou registro no banco de dados
             if ($query_usuarios -> rowCount() != 0) {
                 $x = 1;
@@ -109,11 +130,52 @@
                     echo "<td>" . $rowUsuarios['nome'] . "</td>";
                     echo "<td>" . $rowUsuarios['email'] . "</td>";
                     echo "<td>" . $rowUsuarios['estatus'] . "</td>";
-                    echo "<td>" . $rowUsuarios['data_cadastro'] . "</td>";
-
+                    echo "<td>" . date("d/m/Y H:i:s", strtotime($data_cadastro)) . "</td>";
+                    echo "<td>" . date("d/m/Y H:i:s", strtotime($data_cadastro)) . "</td>";
+                    echo "<td><a href='#'>[Editar]</a> <a href='#'>[Excluir]</a> </td>";
                     $x = $x + 1;
                 }
+            
+            
+                /* -------------------------- PAGINAÇÃO - PARTE 2 - INÍCIO -------------------------- */
+                // 6 - Contar quantidade de registros no meu banco de dados
+                $query_qtd_registros = $conexao -> prepare("SELECT COUNT(id) AS num_result FROM usuarios");
+                $query_qtd_registros -> execute();
 
+                $row_qtd_registros = $query_qtd_registros -> fetch(PDO::FETCH_ASSOC);
+
+                // 7 - Identificar a quantidade de páginas para exibir todos os registros (CEIL)
+                $qtd_pagina = ceil($row_qtd_registros['num_result'] / $limite_result);
+
+                // 8 - Criar uma variável para informar o máximo de links na página
+                $maximo_link = 2;
+
+                // 9 - Mostra o link da primeira página
+                echo "<a href='listar.php?page=1'>Primeira</a>";
+
+                // 10 - Listar os links antes da página atual
+                for ($pagina_anterior = $pagina - $maximo_link; $pagina_anterior <= $pagina - 1; $pagina_anterior++) {
+
+                    if ($pagina_anterior >= 1) {
+                        echo "<a href='listar.php?page=$pagina_anterior'>$pagina_anterior</a>";
+                    }
+                }
+
+                // 11 - Mostrar a página atual
+                echo "$pagina";
+
+                // 12 - Listar os links posteriores
+                for ($pagina_posterior = $pagina + 1; $pagina_posterior <= $pagina + $maximo_link; $pagina_posterior++) {
+
+                    if ($pagina_posterior <= $qtd_pagina) {
+                        echo "<a href='listar.php?page=$pagina_posterior'>$pagina_posterior</a>";
+                    }
+                }
+
+                // Link da última página
+                echo "<a href='listar.php?page=$qtd_pagina>Última</a>";
+
+                /* -------------------------- PAGINAÇÃO - PARTE 2 - FINAL -------------------------- */
             } else {
 
                 echo "<p style='color: red;'>Erro: Usuário não encontrado </p>";
