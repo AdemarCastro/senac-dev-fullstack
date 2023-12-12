@@ -108,7 +108,7 @@
             /* -------------------------- PAGINAÇÃO - PARTE 1 - FINAL -------------------------- */
 
             // 2 - Criando a consulta de registros de usuários
-            $query_usuarios = $conexao -> prepare("SELECT id, matricula, nome, email, estatus, data_cadastro FROM usuarios ORDER BY data_cadastro ASC");
+            $query_usuarios = $conexao -> prepare("SELECT id, matricula, nome, email, estatus, data_cadastro FROM usuarios ORDER BY data_cadastro DESC LIMIT $inicio, $limite_result");
 
             // 3 - Executando a consulta
             $query_usuarios -> execute();
@@ -132,7 +132,7 @@
                     echo "<td>" . $rowUsuarios['estatus'] . "</td>";
                     echo "<td>" . date("d/m/Y H:i:s", strtotime($data_cadastro)) . "</td>";
                     echo "<td>" . date("d/m/Y H:i:s", strtotime($data_cadastro)) . "</td>";
-                    echo "<td><a href='#'>[Editar]</a> <a href='#'>[Excluir]</a> </td>";
+                    echo "<td><a href='editar.php?id=$id'>[Editar]</a> <a href='#'>[Excluir]</a> </td>";
                     $x = $x + 1;
                 }
             
