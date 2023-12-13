@@ -110,24 +110,25 @@
 
             if (!$empty_input) {
 
-                // Implementando o UPDATE no Banco de Dados
+                // 11 - Implementando o UPDATE no Banco de Dados
                 $query_up_usuario = "UPDATE usuarios SET matricula=:matricula, nome=:nome, email=:email, estatus=:estatus WHERE id=:id";
 
-                // Preparando a query
+                // 12 - Preparando a query
                 $edit_usuario = $conexao->prepare($query_up_usuario);
 
-                // Passando os valores do vetor de $dados para os pseudo-nomes
+                // 13 - Passando os valores do vetor de $dados para os pseudo-nomes
                 $edit_usuario->bindParam(':matricula', $dados['matricula'], PDO::PARAM_STR);
                 $edit_usuario->bindParam(':nome', $dados['nome'], PDO::PARAM_STR);
                 $edit_usuario->bindParam(':email', $dados['email'], PDO::PARAM_STR);
                 $edit_usuario->bindParam(':estatus', $dados['estatus'], PDO::PARAM_STR);
                 $edit_usuario->bindParam(':id', $id, PDO::PARAM_INT);
 
-                // Verificar se a execução da query foi realizada com sucesso
+                // 14 - Verificar se a execução da query foi realizada com sucesso
                 if ($edit_usuario->execute()) {
-                    $_SESSION['msg'] = "<p style='color:#0f0;'>Usuário atualizado com sucesso!</p>";
+                    $_SESSION['msg'] = "<p style='color:#0f0; text-align: center;'>Usuário atualizado com sucesso!</p>";
+                    header("Location: listar.php");
                 } else {
-                    echo "<p style='color:#f00;'>Usuário não atualizado</p>";
+                    echo "<p style='color:#f00; text-align: center;'>Usuário não atualizado</p>";
                 }
 
             }
@@ -166,7 +167,7 @@
 
                         echo $row_usuario['nome'];
                     }
-                ?>  " width="90%"><br><br>
+                ?>" width="90%"><br><br>
 
             <label>E-mail: </label>
             <input type="email" name="email" id="email" placeholder="Digite o melhor e-mail" value="<?php
@@ -184,7 +185,7 @@
             <label>Status: </label>
             <input type="text" name="estatus" id="estatus" value="<?php
 
-                    // Verificarse o vaio dados do usuario pelo formulário. Se verdadeiro, manter os dados
+                    // Verificar se os dados do usuario pelo formulário. Se verdadeiro, manter os dados
                     if (isset($dados['estatus'])) {
 
                         echo $dados['estatus'];

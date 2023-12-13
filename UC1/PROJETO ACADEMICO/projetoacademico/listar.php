@@ -1,5 +1,8 @@
 <?php
 
+    session_start();
+    ob_start(); // Limpando o Buffer da saída do redirecionamento
+
     // Realizando a conexão com o banco de dados
     include("conexao.php");
     $conexao = conectar();
@@ -65,8 +68,19 @@
         >Listar Registros</h1>
         <h1 
             style="float: right;"
-        ><a href="cadastrar.php">Cadastrar</a></h1>
+        ><a href="cadastro.php">Cadastrar</a></h1>
     </div>
+
+    <?php
+
+        // Verficando se a sessão MSG existe
+        if (isset($_SESSION['msg'])) {
+            echo $_SESSION['msg'];
+        }
+
+        // Destruindo a sessão
+        unset($_SESSION['msg']);
+    ?>
 
     <br><br><br><br>
     <hr>
@@ -87,6 +101,7 @@
             </tr>
         </thead>
         <tbody>
+
         <?php
 
             /* -------------------------- PAGINAÇÃO - PARTE 1 - INÍCIO -------------------------- */
@@ -136,52 +151,58 @@
                     $x = $x + 1;
                 }
             
-            
-                /* -------------------------- PAGINAÇÃO - PARTE 2 - INÍCIO -------------------------- */
-                // 6 - Contar quantidade de registros no meu banco de dados
-                $query_qtd_registros = $conexao -> prepare("SELECT COUNT(id) AS num_result FROM usuarios");
-                $query_qtd_registros -> execute();
-
-                $row_qtd_registros = $query_qtd_registros -> fetch(PDO::FETCH_ASSOC);
-
-                // 7 - Identificar a quantidade de páginas para exibir todos os registros (CEIL)
-                $qtd_pagina = ceil($row_qtd_registros['num_result'] / $limite_result);
-
-                // 8 - Criar uma variável para informar o máximo de links na página
-                $maximo_link = 2;
-
-                // 9 - Mostra o link da primeira página
-                echo "<a href='listar.php?page=1'>Primeira</a>";
-
-                // 10 - Listar os links antes da página atual
-                for ($pagina_anterior = $pagina - $maximo_link; $pagina_anterior <= $pagina - 1; $pagina_anterior++) {
-
-                    if ($pagina_anterior >= 1) {
-                        echo "<a href='listar.php?page=$pagina_anterior'>$pagina_anterior</a>";
-                    }
-                }
-
-                // 11 - Mostrar a página atual
-                echo "$pagina";
-
-                // 12 - Listar os links posteriores
-                for ($pagina_posterior = $pagina + 1; $pagina_posterior <= $pagina + $maximo_link; $pagina_posterior++) {
-
-                    if ($pagina_posterior <= $qtd_pagina) {
-                        echo "<a href='listar.php?page=$pagina_posterior'>$pagina_posterior</a>";
-                    }
-                }
-
-                // Link da última página
-                echo "<a href='listar.php?page=$qtd_pagina>Última</a>";
-
-                /* -------------------------- PAGINAÇÃO - PARTE 2 - FINAL -------------------------- */
             } else {
 
                 echo "<p style='color: red;'>Erro: Usuário não encontrado </p>";
             }
-            ?>
+
+        ?>
+
+            
         </tbody>
     </table>
+
+    <?php
+        /* -------------------------- PAGINAÇÃO - PARTE 2 - INÍCIO -------------------------- */
+            echo "<br><br><br>";
+            // 6 - Contar quantidade de registros no meu banco de dados
+            $query_qtd_registros = $conexao -> prepare("SELECT COUNT(id) AS num_result FROM usuarios");
+            $query_qtd_registros -> execute();
+
+            $row_qtd_registros = $query_qtd_registros -> fetch(PDO::FETCH_ASSOC);
+
+            // 7 - Identificar a quantidade de páginas para exibir todos os registros (CEIL)
+            $qtd_pagina = ceil($row_qtd_registros['num_result'] / $limite_result);
+
+            // 8 - Criar uma variável para informar o máximo de links na página
+            $maximo_link = 2;
+
+            // 9 - Mostra o link da primeira página
+            echo "<a href='listar.php?page=1'> << </a>";
+
+            // 10 - Listar os links antes da página atual
+            for ($pagina_anterior = $pagina - $maximo_link; $pagina_anterior <= $pagina - 1; $pagina_anterior++) {
+
+                if ($pagina_anterior >= 1) {
+                    echo "<a href='listar.php?page=$pagina_anterior'> $pagina_anterior </a>";
+                }
+            }
+
+            // 11 - Mostrar a página atual
+            echo "$pagina";
+
+            // 12 - Listar os links posteriores
+            for ($pagina_posterior = $pagina + 1; $pagina_posterior <= $pagina + $maximo_link; $pagina_posterior++) {
+
+                if ($pagina_posterior <= $qtd_pagina) {
+                    echo "<a href='listar.php?page=$pagina_posterior'> $pagina_posterior </a>";
+                }
+            }
+
+            // Link da última página
+            echo "<a href='listar.php?page=$qtd_pagina> >> </a>";
+
+        /* -------------------------- PAGINAÇÃO - PARTE 2 - FINAL -------------------------- */
+    ?>
 </body>
 </html>

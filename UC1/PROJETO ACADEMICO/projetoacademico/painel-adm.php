@@ -13,8 +13,13 @@
     <h2>Olá, <?php echo $_SESSION['usuario']; ?> </h2>
 </div>
 
-<!-- Link para encerrar a sessão do usuário -->
+
 <nav align="right">
+
+    <!-- Link para listar usuário -->
+    <button><a style="color: black; text-decoration: none;" href="listar.php">Listar usuários</a></button>
+
+    <!-- Link para encerrar a sessão do usuário -->
     <button><a style="color: black; text-decoration: none;" href="scriptlogout.php">Logout</a></button>
 </nav>
 

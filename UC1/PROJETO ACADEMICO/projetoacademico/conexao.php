@@ -9,7 +9,9 @@
             echo $e -> getCode();
         }
 
+        echo "Oi";
         return $conexao;
+        
     }
 
 ?>
