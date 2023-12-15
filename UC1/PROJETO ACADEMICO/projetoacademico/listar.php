@@ -89,6 +89,7 @@
     <table>
         <thead>
             <tr>
+                <th>Selecionar</th>
                 <th>Usuário Nº</th>
                 <th>Id</th>
                 <th>Matrícula</th>
@@ -139,6 +140,7 @@
                     extract($rowUsuarios);
 
                     echo "<tr>";
+                    echo "";
                     echo "<td>" . $x . "</td>";
                     echo "<td>" . $rowUsuarios['id'] . "</td>";
                     echo "<td>" . $rowUsuarios['matricula'] . "</td>";
@@ -147,7 +149,7 @@
                     echo "<td>" . $rowUsuarios['estatus'] . "</td>";
                     echo "<td>" . date("d/m/Y H:i:s", strtotime($data_cadastro)) . "</td>";
                     echo "<td>" . date("d/m/Y H:i:s", strtotime($data_cadastro)) . "</td>";
-                    echo "<td><a href='editar.php?id=$id'>[Editar]</a> <a href='confirmarExcluir.php?id=$id'>[Excluir]</a> </td>";
+                    echo "<td><a href='editar.php?id=$id'>[Editar]</a> <a href='confirmarexcluir.php?id=$id'>[Excluir]</a> </td>";
                     $x = $x + 1;
                 }
             

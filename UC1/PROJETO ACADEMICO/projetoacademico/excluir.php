@@ -1,7 +1,7 @@
 <?php
 
     session_start();
-    ob_clean(); // Limpar o buffer de memória -> Limpe e pegue a sessão correta
+    ob_start(); // Limpar o buffer de memória -> Limpe e pegue a sessão correta
 
     // 1 - Conectando o Banco de Dados
     include("conexao.php");
